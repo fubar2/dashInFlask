@@ -13,6 +13,7 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output, State
+from dash.exceptions import PreventUpdate
 import pandas as pd
 import matplotlib as mpl
 mpl.use('Agg') # headless!
@@ -68,7 +69,21 @@ def Add_Dash(server=None):
         'layout': {
             'clickmode': 'event+select',
             'title': '%.2f fraction of %d rows from %s' % (useFrac,nr,lcd.infile),
-            'xaxis': {'title':'Date'},
+            'xaxis': {'title':'Date',
+
+                        'titlefont':{
+                        'family':'Arial, sans-serif',
+                        'size':18,
+                        'color':'lightgrey'
+                        },
+                'showticklabels': True,
+                'tickangle':45,
+                'tickfont':{
+                    'family':'Arial',
+                    'size':8,
+                    'color':'black'
+                    }
+                },
             'yaxis': {'title':'Reported Mass (g)'},
                 }
         }
@@ -81,7 +96,7 @@ def Add_Dash(server=None):
                     {'label': 'San Francisco', 'value': 'SF'}
                 ]
         """
-        dpath ="/home/ross/rossgit/plotlydash-flask-tutorial/data/*.xls"
+        dpath ="/home/ross/rossgit/dashInFlask/data/*.xls"
         fl = glob.glob(dpath)
         ddl = []
         for fn in fl:
@@ -107,7 +122,7 @@ def Add_Dash(server=None):
     mdates.rcParams['timezone'] = tzl
     NSD = 2.0
     useFrac = 1.0
-    filePath = '/home/ross/rossgit/plotlydash-flask-tutorial/data/loadcellsample55k.xls'
+    filePath = '/home/ross/rossgit/dashInFlask/data/loadcellsample55k.xls'
     # setup before anything else
     lcd = loadCellData(NSD,filePath)
     lastFilePath = filePath
@@ -152,17 +167,17 @@ def Add_Dash(server=None):
     @dash_app.callback(
         Output('aplot', 'figure'),
         [Input('reloadbutton', 'n_clicks_timestamp')],
-        [State('localstore', 'data')]       )
-    def updateFigure(reloadtime,sessdat):
+        [State('localstore', 'data'),State('frac','value'),State('chooser','value')])
+    def updateFigure(reloadtime,sessdat,frac,fpath):
         return figUpdate(sessdat['useFrac'],sessdat['filePath'])
-            
     @dash_app.callback(
         Output('localstore', 'data'),
         [Input('chooser','value'),Input('frac','value')],
         [State('localstore', 'data')]
         )
-    def updateFigure2(filepath,frac,sessdat):
-        sessdat['filePath'] = filepath
+    def updateFigure2(fpath,frac,sessdat):
+    
+        sessdat['filePath'] = fpath
         sessdat['useFrac'] = frac
         return sessdat
 

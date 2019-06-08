@@ -29,7 +29,7 @@ class loadCellData():
         if infi:
             self.infile = infi
         else:
-            self.infile = '/home/ross/rossgit/plotlydash-flask-tutorial/data/loadcellsample55k.xls'
+            self.infile = '/home/ross/rossgit/dashInFlask/data/loadcellsample55k.xls'
         df = pd.read_csv(self.infile,sep='\t')
         try:
             df['date'] = pd.to_datetime(df.iloc[:,0],unit='s')
