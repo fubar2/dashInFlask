@@ -1,8 +1,10 @@
 # a data visualisation dash component in a generic flask app
-# Derived from the Plot.ly Dash Flask Tutorial
+
+Derived from the Plot.ly Dash Flask Tutorial - README from that project is at end of this.
 
 Allows a folder of tabular files from sensors to be viewed and subsampled if huge.
 Experiments with dash and in particular with dash in flask
+
 Fair bit of mucking about required but after realising the futility of keeping 
 any state handy, it seems to work. Data has to be re-read to be re-sampled.
 Caching needs thought...not sure I care yet.
