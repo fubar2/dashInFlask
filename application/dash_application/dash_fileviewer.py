@@ -69,22 +69,28 @@ def Add_Dash(server=None):
         'layout': {
             'clickmode': 'event+select',
             'title': '%.2f fraction of %d rows from %s' % (useFrac,nr,lcd.infile),
-            'xaxis': {'title':'Date',
+            'xaxis': {'title':'Time',
 
                         'titlefont':{
                         'family':'Arial, sans-serif',
                         'size':18,
-                        'color':'lightgrey'
+                        'color':'darkblue'
                         },
                 'showticklabels': True,
                 'tickangle':45,
                 'tickfont':{
                     'family':'Arial',
-                    'size':8,
+                    'size':9,
                     'color':'black'
-                    }
-                },
-            'yaxis': {'title':'Reported Mass (g)'},
+                        }
+                    },
+            'yaxis': {'title':'Reported Mass (g)',
+                      'titlefont':{
+                        'family':'Arial, sans-serif',
+                        'size':18,
+                        'color':'darkblue'
+                        },
+                    },
                 }
         }
         return figure
@@ -170,13 +176,13 @@ def Add_Dash(server=None):
         [State('localstore', 'data'),State('frac','value'),State('chooser','value')])
     def updateFigure(reloadtime,sessdat,frac,fpath):
         return figUpdate(sessdat['useFrac'],sessdat['filePath'])
+        
     @dash_app.callback(
         Output('localstore', 'data'),
         [Input('chooser','value'),Input('frac','value')],
         [State('localstore', 'data')]
         )
     def updateFigure2(fpath,frac,sessdat):
-    
         sessdat['filePath'] = fpath
         sessdat['useFrac'] = frac
         return sessdat
