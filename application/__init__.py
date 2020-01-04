@@ -14,7 +14,7 @@ def create_app():
         app.register_blueprint(routes.main_bp)
 
         # Import Dash application
-        from .dash_application import dash_fileviewer
+        from .plotSensorDash import dash_fileviewer
         app = dash_fileviewer.Add_Dash(server=app)
 
         return app
