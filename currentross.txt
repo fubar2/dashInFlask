@@ -166,7 +166,7 @@ ubuntu-advantage-tools==19.2
 ubuntu-drivers-common==0.0.0
 ufw==0.36
 unattended-upgrades==0.1
-urllib3==1.24.3
+urllib3==1.26.5
 usb-creator==0.3.3
 voluptuous==0.11.5
 voluptuous-serialize==2.1.0
