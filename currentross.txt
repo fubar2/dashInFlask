@@ -94,7 +94,7 @@ nbconvert==5.4.0
 nbformat==4.4.0
 netifaces==0.10.4
 notebook==5.7.4
-numpy==1.16.4
+numpy==1.22.0
 oauthlib==2.1.0
 olefile==0.46
 pandas==0.24.2
